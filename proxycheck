@@ -1,0 +1,35 @@
+#!/bin/bash
+# thanks to indosec
+# JANGAN RECODE YA BANGSAT CAPEK GW BIKIN
+clear;
+HIJAU="\e[92m"
+MERAH="\e[91m"
+PUTIH="\e[97m"
+BANNER() {
+printf "
+$MERAH SOCKS CRACKER
+$PUTIH CREATE BY WIDHISEC
+"
+}
+BANNER
+DATA() {
+URL=$(curl -s "http://indosec.web.id/api/socks.php?type=check&proxy=$list" 2>/dev/null | jq -r .status)
+if [[ $URL == '' ]]; then
+	echo "LIVE => $List"
+else
+	echo "DIE => $list"
+fi
+}
+echo "List In This Directory : "
+ls
+echo -n "Masukan File List : "
+read khplist
+if [ ! -f $khplist ]; then
+    echo "$list No Such File"
+exit
+fi
+
+for list in $(cat $khplist)
+do
+DATA
+done
